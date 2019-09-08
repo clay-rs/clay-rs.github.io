@@ -5,7 +5,7 @@
 layout: home
 ---
 
-Clay is flexible Monte-Carlo ray tracing engine written in Rust and OpenCL.
+{% include description.md %}
 
 ## Features
 
@@ -18,3 +18,7 @@ Clay is flexible Monte-Carlo ray tracing engine written in Rust and OpenCL.
 ## [Knowledge](/knowledge)
 
 {% include knowledge_header.md %}
+
+## Contribution
+
+Contributions are extremely welcome. The project is designed to be very powerful, but for now it contains only basic functionality, so there is a lot of things to implement.

@@ -1,4 +1,4 @@
-The knowledge base of the project. Here you can find basics of raytracing theory, architecture of the project, code examples and other useful information.
+In the knowledge base of the project you can find basics of raytracing theory, architecture of the project, code examples and other useful information.
 
 ### Table of content
 
