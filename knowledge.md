@@ -17,6 +17,8 @@ Clay uses backward propagation of rays from camera to scene. For each pixel of t
 
 ## Architecture
 
+![Renderer](/assets/renderer.svg)
+
 ![Object folding](/assets/object_folding.svg)
 
 ## Usage
