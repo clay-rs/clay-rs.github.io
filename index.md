@@ -5,6 +5,8 @@
 layout: home
 ---
 
+![](/assets/title_image.jpg)
+
 {% include description.md %}
 
 ## Features
