@@ -1,6 +1,12 @@
-Contributions are extremely welcome. The project is designed to be very powerful, but for now it contains only basic functionality, so there is a lot of things to implement.
+---
+layout: page
+title: Contribution
+permalink: /contribution/
+---
 
-Here is the possible directions:
+{% include contribution_header.md %}
+
+Here is the possible directions of contribution:
 
 + *New shapes, materials, etc.* - there are only basic primitives like ellipse and parallelepiped added for testing purposes, but it is possible to add various types of objects like composite objects (made of polygons, for example), scalar function for ray marching, some objects for volumetric rendering and many others.
 + *New techniques of raytracing* - for now there is only basic backward ray propagation technique implemented with some improvement in importance sampling. But it would be great to implement some advanced techniques like bidirectional ray tracing, Metropolis light transport, photon maps and other ones.

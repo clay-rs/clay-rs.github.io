@@ -13,7 +13,7 @@ layout: home
 
 {% include features.md %}
 
-## [About](/about)
+## About
 
 {% include about.md %}
 
@@ -21,6 +21,8 @@ layout: home
 
 {% include knowledge_header.md %}
 
-## Contribution
+## [Contribution](/contribution)
 
-{% include contribution.md %}
+{% include contribution_header.md %}
+
+You can read more about possible directions of contribution [here](/contribution).
