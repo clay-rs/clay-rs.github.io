@@ -1,21 +1,9 @@
 ---
 layout: page
-title: Knowledge
-permalink: /knowledge/
+title: Structure
+permalink: /structure/
+order: 2
 ---
-
-{% include knowledge_header.md %}
-
-## Basics
-
-**Ray tracing** is a technique of generating photorealistic images via simulation of light rays propagation according to the rules of geometric optics.
-
-**Monte-Carlo** is a method of finding integrals by accumulating values in randomly sampled points of the function being integrated.
-In ray tracing we are finding the light integral in each pixel of our virtual camera. The Monte-Carlo method converges relatively slowly (the error is inversely proportianl to the square root of the number of samples), but the sampling could be effectively preformed in parallel, so it's a good idea to run Monte-Carlo integration on massively parallel hardware like GPUs. 
-
-Clay uses backward propagation of rays from camera to scene. For each pixel of the image the ray is casted from the camera towards the specific direction defined by camera orientation and coordinate of the pixel. The ray can hit object, in this case it will be absorbed by object and *one or zero* secondary rays will be produced.
-
-## Architecture
 
 Clay is a heterogenous computing software, so a lot of entities in it consists of *host* and *device parts*.
 
@@ -25,7 +13,7 @@ Clay is a heterogenous computing software, so a lot of entities in it consists o
 
 The type of device module and the interface are defined by the `Instance<Class>` trait implemented for the entity. You can find more information about classes and its instances in the documentation of [clay-core](https://docs.rs/clay-core/) and [clay](https://docs.rs/clay/) crates.
 
-### Pipeline
+## Pipeline
 
 ![Pipeline](/assets/pipeline.svg)
 
@@ -35,23 +23,23 @@ For actual rendering it produces a `RenderWorker`, which is like a proxy of rend
 
 The raw images of all workers after running of multiple rendering procedures are passed to a `Postproc`. It sums up these images, performs some user-defined filtering (e.g. color correction) if it's needed, and outputs the final RGB image that may be saved to a file or drawn in a window. 
 
-### Renderer
+## Renderer
 
 ![Renderer](/assets/renderer.svg)
 
 The behaviour of the renderer is defined by `Scene` and `View`. There are some already implemented scenes and views in the library but you can implement your own.
 
-#### Scene
+### Scene
 
 Existing scenes is designed to be a container of objects. Scene device module contains the function that takes a single ray, produced by view, and performs the search for an object hit by this ray. After object is found, an interaction between it and ray is performed, producing a secondary ray if it is needed. Secondary ray is handled in the same manner and this chain process continues until the ray is consumed by the light source or background, or number of bounces of the ray is exceeded the limit.
 
 Scene also has a background which describes what happens to ray that hasn't hit any object on its way.
 
-#### View
+### View
 
 The main function of view is to produce rays from each pixel of the viewport (Clay uses reversed ray propagation - from the camera to the light source). View also has device function that takes pixes indices and produces ray computing its origin and direction. Through this mechanism view can simulate (e.g. stochastically) different effects like MSAA and depth-of-field.
 
-### Objects
+## Objects
 
 `Object` is an entity that is able to do these two things:
 + For the given ray it gives the closest point where this ray intersects it.
@@ -70,43 +58,3 @@ Also there are mechanism calling `combine` for materials. Let's imagine the situ
 ![Object folding](/assets/object_folding.svg)
 
 *Example of the object construction hierarchy. The color shows which class an entity is instance of.*
-
-## Usage
-
-Clay host code is written in [Rust](https://www.rust-lang.org/).
-
-To start using Clay just add the following code to the `Cargo.toml` of your Rust project:
-
-```toml
-[dependencies]
-clay = "0.1"
-```
-
-Clay requires OpenCL version 1.1 or above to be installed. Also [SDL2](https://libsdl.org/) library the should be installed if you want to use [clay-viewer](https://github.com/clay-rs/clay-viewer).
-
-## Examples
-
-At first the Clay source code should be downloaded:
-
-```bash
-git clone https://github.com/clay-rs/clay
-cd clay
-```
-
-To run specific example:
-```bash
-cargo run --example <name-of-example>
-```
-
-Examples uses clay-viewer, so make sure that SDL2 is installed.
-
-Available examples:
-
-+ `00_ocl_info` - prints information about available OpenCL platforms and devices.
-+ `01_diffuse_spheres` - draws static image of two spheres.
-+ `02_spheres_and_motion` - the same but you can fly around using your keyboard and mouse. You can read [here](https://github.com/clay-rs/clay-viewer) about controls.
-+ `03_shape_select` - draws different kinds of shapes using `select` macro.
-+ `04_light_source` - usage of importance sampling technique to render illumination from small but bright light source.
-+ `05_materials` - draws simple interior of a small room with different materials created using `combine` macro. *This example is relatively heavy, so you'll need to wait for a while to get an image of sufficient quality.* 
-+ ...
-+ `99_advanced` - experiments with some new techniques, changes frequently. 

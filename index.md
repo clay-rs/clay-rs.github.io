@@ -17,12 +17,20 @@ layout: home
 
 {% include about.md %}
 
-## [Knowledge](/knowledge)
+## Source
 
-{% include knowledge_header.md %}
+{% include source.md %}
 
-## [Contribution](/contribution)
+## Knowledge base
 
-{% include contribution_header.md %}
+1. [Basics](/basics) - Some principles of ray tracing and their implementation in Clay.
+2. [Structure](/structure) - Rendering mechanics, description of program entities and their hierarchy.
+3. [Usage](/usage) - How to use Clay and list of examples.
 
-You can read more about possible directions of contribution [here](/contribution).
+## Contribution
+
+Contributions are extremely welcome. The project is designed to be very powerful, but for now it contains only basic functionality, so there is a lot of things to implement.
+
+## Licence
+
+Thre project is licenced under *MIT/Apache-2.0*, look [here](/license) for more information.
