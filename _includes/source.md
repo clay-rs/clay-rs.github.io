@@ -13,6 +13,6 @@ The source code of the project's main crate is available on Github: [github.com/
 [crates]: https://crates.io/crates/clay
 [docs]: https://docs.rs/clay
 [travis]: https://travis-ci.org/clay-rs/clay
-[license]: #license
+[license]: /license
 
 All components of the project are located in Clay-rs organization: [github.com/clay-rs](https://github.com/clay-rs).
