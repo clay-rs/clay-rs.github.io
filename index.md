@@ -47,4 +47,4 @@ Contributions are extremely welcome. The project is designed to be very powerful
 
 ## Licence
 
-Thre project is licenced under *MIT/Apache-2.0*, look [here](/license) for more information.
+The project is licenced under dual *MIT/Apache-2.0* license, look [here](/license) for more information.
