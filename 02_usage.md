@@ -2,7 +2,7 @@
 layout: page
 title: Usage
 permalink: /usage/
-order: 3
+order: 2
 ---
 
 

@@ -14,8 +14,6 @@ The key principles of the project is modularity and extendability. The performan
 
 ## Source
 
-The source code of the project's main crate is available on Github: [github.com/clay-rs/clay](https://github.com/clay-rs/clay).
-
 [![Crates.io][crates_badge]][crates]
 [![Docs.rs][docs_badge]][docs]
 [![Travis CI][travis_badge]][travis]
@@ -31,13 +29,17 @@ The source code of the project's main crate is available on Github: [github.com/
 [travis]: https://travis-ci.org/clay-rs/clay
 [license]: /license
 
-All components of the project are located in Clay-rs organization: [github.com/clay-rs](https://github.com/clay-rs).
+All components of the project including [the main crate](https://github.com/clay-rs/clay) are located on the Github in [Clay-rs organization](https://github.com/clay-rs).
 
 ## Knowledge base
 
-1. [Principles](/principles) - Some basic abstractions the project is built onto.
-2. [Structure](/structure) - Rendering mechanics, description of program entities and their hierarchy.
-3. [Usage](/usage) - How to use Clay and list of examples.
+### [Architecture](/architecture)
+
+This section describes the basic principles the project is built onto and contains informantion about rendering mechanics, program entities and their hierarchy.
+
+### [Usage](/usage)
+
+This section briefly shows how to use Clay and contains a list of examples.
 
 ## Contribution
 

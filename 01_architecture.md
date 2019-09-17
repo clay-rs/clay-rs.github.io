@@ -1,19 +1,33 @@
 ---
 layout: page
-title: Structure
-permalink: /structure/
-order: 2
+title: Architecture
+permalink: /architecture/
+order: 1
 ---
 
-Clay is a heterogenous computing software, so a lot of entities in it consists of *host* and *device parts*.
+## Principles
 
-*Host part* performs operations on the host that usually is about resourse management, e.g. handling host data and loading it to the device. Host part is also gives information about device part.
+Monte-Carlo ray tracing process converges relatively slowly (an error decreses with the inverse square root of the number of samples) but the sampling could be effectively performed in parallel, so it's a good idea to run Monte-Carlo integration on massively parallel hardware like GPUs.
 
-*Device part* is a piece OpenCL code that contains some definitions with specific names and functions with specific signatures. The term 'module' is used for this piece of code. Names and signatures of the module content are called the interface, and they are the same for all modules of the same type. Corresponding device functionality is fully defined in the module, and resulting OpenCL kernel is assembled from these modules.
+Clay is able to run the part of its code on a pararllel hardware, and this part of the program is called *device part*. The remaining code is running on the main CPU as usual, and is called *host part*. 
 
-The type of device module and the interface are defined by the `Instance<Class>` trait implemented for the entity. You can find more information about classes and its instances in the documentation of [clay-core](https://docs.rs/clay-core/) and [clay](https://docs.rs/clay/) crates.
+### Host
+
+Host part of the Clay is written in [Rust programming language](https://www.rust-lang.org/) and usually performs management tasks. It employs strict but flexible Rust trait system and type parametrization to provide a required level of modularity. You can assemble desired ray tracing pipeline from primitive building blocks, and if the desired functionality doesn't exist in Clay yet, you always can write it by yourself by implementing corresponding traits.
+
+### Device
+
+Device part of the Clay is written in [OpenCL](https://www.khronos.org/opencl/) and contains performance-critical parallel code.
+
+Device code consists of so-called modules. The module contains some definitions with specific names and functions with specific signatures. Names and signatures of the module content are called the *interface*, and they are the same for all modules of the same type.
+
+The type of device module and the interface are defined by the `Instance<Class>` trait implemented for the program entity. You can find more information about classes and its instances in the documentation of [clay-core](https://docs.rs/clay-core/) and [clay](https://docs.rs/clay/) crates.
+
+Each device module corresponds to the specific host entity and resulting OpenCL kernel is assembled according to the hierarchy of host entities defined by user. Along with the host implementation you also able to write your own modules of OpenCL code to run on a GPU. 
 
 ## Pipeline
+
+Rendering pipeline is a sequence of operations that is necessary to obtain a resulting image.
 
 ![Pipeline](/assets/pipeline.svg)
 
@@ -27,7 +41,11 @@ The raw images of all workers after running of multiple rendering procedures are
 
 ![Renderer](/assets/renderer.svg)
 
-The behaviour of the renderer is defined by `Scene` and `View`. There are some already implemented scenes and views in the library but you can implement your own.
+The behaviour of the renderer is defined by `Scene` and `View`.
+
+Clay uses backward propagation of rays from view to scene. For each pixel of the image the ray is casted from the view towards the specific direction defined by view orientation and coordinate of the pixel. The ray can hit object, in this case it will be absorbed by object and *one or zero* secondary rays will be produced.
+
+There are some already implemented scenes and views in the library but you can implement your own.
 
 ### Scene
 
@@ -37,7 +55,7 @@ Scene also has a background which describes what happens to ray that hasn't hit 
 
 ### View
 
-The main function of view is to produce rays from each pixel of the viewport (Clay uses reversed ray propagation - from the camera to the light source). View also has device function that takes pixes indices and produces ray computing its origin and direction. Through this mechanism view can simulate (e.g. stochastically) different effects like MSAA and depth-of-field.
+The main function of view is to produce rays from each pixel of the viewport. View also has device function that takes pixes indices and produces ray computing its origin and direction. Through this mechanism view can simulate (e.g. stochastically) different effects like motion blur and depth of field.
 
 ## Objects
 
@@ -45,7 +63,7 @@ The main function of view is to produce rays from each pixel of the viewport (Cl
 + For the given ray it gives the closest point where this ray intersects it.
 + For the given ray and intersect point it returns color and produces secondary ray if it's needed.
 
-An object may (but not must) be constructed from `Shape` and `Material`. The first describes the geometry of an object that is used to find an intersection point, and the second returns color and prodeces secondary rays according to the properties of itself. The construction of such object is performed by `Covered` adapter.
+An object may (but not must) be constructed from `Shape` and `Material`. The first describes the geometry of an object that is used to find an intersection point, and the second returns color and produces secondary rays according to the properties of itself (e.g. including BRDF implementation). The construction of such object is performed by `Covered` adapter.
 
 An object could be mapped in space, using arbitrary mapping. These mappings should implement `Map` trait and contain device code to map rays and normals to/from the object local coordinate system. Two mapping could be chained together using `Chain` adapter, that creates new forward and backward transformations that applies these two mappings subsequently. There are a few already implemented mapping including shift, scale and arbitrary linear transformation using matrix. Mapping could be applied to an object using `ObjectMapper` adapter (also there is a `ShapeMapper` for mapping shapes separately).
 
