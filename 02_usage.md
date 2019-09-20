@@ -39,9 +39,24 @@ Examples uses clay-viewer, so make sure that SDL2 is installed.
 Available examples:
 
 + `00_ocl_info` - prints information about available OpenCL platforms and devices.
-+ `01_spheres` - draws static image of two spheres.
-+ `02_motion` - the same but you can fly around using your keyboard and mouse. You can read [here](https://github.com/clay-rs/clay-viewer) about controls.
-+ `03_shapes` - draws different kinds of shapes using `shape_select` macro.
-+ `04_materials` - different materials using `material_combine` and `material_select` macros.
-+ `05_light_source` - usage of importance sampling technique to render illumination from small but bright light source.
-+ `06_indirect_lighting` - draws simple interior of a small room illuminated by secondary rays.
+
++ `01_1_spheres` and `02_2_motion`. The first draws static image of two spheres. The second is the same but you can fly around using your keyboard and mouse. You may read [here](https://github.com/clay-rs/clay-viewer) about controls.
+
+  [![](/gallery/examples/01_spheres.min.png)](/gallery/examples/01_spheres.png)
+
++ `02_shapes` - draws different kinds of shapes using `shape_select` macro.
+
+  [![](/gallery/examples/02_shapes.min.png)](/gallery/examples/02_shapes.png)
+
++ `03_materials` - different materials using `material_combine` and `material_select` macros.
+
+  [![](/gallery/examples/03_materials.min.png)](/gallery/examples/03_materials.png)
+
++ `04_1_light_source` and `04_2_multiple_sources` - usage of importance sampling technique to render illumination from small but bright light sources.
+
+  [![](/gallery/examples/04_1_light_source.min.png)](/gallery/examples/04_1_light_source.png)
+  [![](/gallery/examples/04_2_multiple_sources.min.png)](/gallery/examples/04_2_multiple_sources.png)
+
++ `05_indirect_lighting` - draws simple interior of a small room illuminated by secondary rays.
+
+  [![](/gallery/examples/05_indirect_lighting.min.png)](/gallery/examples/05_indirect_lighting.png)
