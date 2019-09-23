@@ -1,12 +1,25 @@
 ---
-layout: home
+layout: page
 ---
 
 ![](/assets/title_image.jpg)
 
-Clay is modular and customizable Monte-Carlo ray tracing engine written in Rust and OpenCL.
+Clay is a flexible Monte-Carlo ray tracing engine written in Rust and OpenCL.
 
 ## About
+
+Clay ray tracing engine is:
+
++ **Fast** - because of the OpenCL, Clay is able to run its kernel code in massively
+  parallel computing systems (e.g. GPUs), that makes it much faster than CPU-only analogs,
+  and allows it to render images of sufficient quality even in real-time.
+
++ **Modular** - Clay is based on strict but flexible Rust trait system and type parametrization,
+  that means you can assemble desired ray tracing pipeline from primitive building blocks.
+
++ **Extendable** - if desired functionality doesn't exist in Clay yet, you always can write
+  it by yourself by implementing corresponding traits. Moreover, you can even write your own
+  modules of OpenCL code to run on a GPU. (And make a pull request after that, if you want to.)
 
 This project is primarily aimed to be a convenient framework for experimenting with ray tracing, testing new techniques, making proof of concepts and other research activity in this field.
 
